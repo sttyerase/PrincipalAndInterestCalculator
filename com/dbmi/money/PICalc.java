@@ -40,7 +40,7 @@ public class PICalc {
       System.out.format("Payment: $%04.2f per period.\n",pmt);
       payDetails = myCalc.calculatePaymentDetails(principal,intrate,months,pmt);
       for(int indx = 0 ; indx < months ; indx++){
-         System.out.format("Interest payment: $%04.2f <==> principal paid: $%04.2f <==> principal balance: $%04.2f\n",payDetails[indx][0],payDetails[indx][1],payDetails[indx][2]);       
+         System.out.format("DETAIL: month %d <==> interest payment: $%04.2f <==> principal paid: $%04.2f <==> principal balance: $%04.2f\n",indx + 1, payDetails[indx][0],payDetails[indx][1],payDetails[indx][2]);       
       } // FOR
 } // MAIN(STRING[])
 
