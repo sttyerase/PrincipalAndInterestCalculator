@@ -2,7 +2,7 @@ package com.dbmi.money;
 
 import java.util.*;
 
-public class PiCalcJson {
+public class PICalcJson {
 
     private String calculation = new String("");
     private StringBuilder sb   = new StringBuilder();
@@ -54,7 +54,7 @@ public class PiCalcJson {
       double principal = 25000.0;
       double intrate  = 0.0385/12;
       double pmt       = 0;
-      PiCalcJson myCalc = new PiCalcJson();
+      PICalcJson myCalc = new PICalcJson();
       String result = myCalc.calculatePayment(principal,intrate,months);
       System.out.format("%s", result);
 } // MAIN(STRING[])
