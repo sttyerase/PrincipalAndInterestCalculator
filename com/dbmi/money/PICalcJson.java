@@ -30,7 +30,6 @@ public class PICalcJson {
 
    public Double[][] calculatePaymentDetails(double princp, double irate, int mon, double pymt){
       Double[][] detail = new Double[mon][3];
-      double totpay = 0;
       double intpaid = 0;
       double balance = princp;
       double prinpaid = 0;
@@ -48,10 +47,8 @@ public class PICalcJson {
     */
    public static void main(String[] args){
       int    months    = 48;
-      Double[][] payDetails = new Double[months][3];
       double principal = 25000.0;
       double intrate  = 0.0385/12;
-      double pmt       = 0;
       PICalcJson myCalc = new PICalcJson();
       String result = myCalc.calculatePayment(principal,intrate,months);
       System.out.format("%s", result);
