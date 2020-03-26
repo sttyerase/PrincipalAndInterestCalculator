@@ -12,19 +12,17 @@ public class PICalcJson {
    public String calculatePayment(double princp, double irate, int mon){
       Double [][] paydet;
       double payment = 0;
-      fmt.format("{\"LOAN\" : { \"terms\" : { \"principal\" :  \"$%04.2f\" , \"interest rate\" : \"%04.2f%% (annual)\", \"months\" : \"%d\"} \n",princp,irate*12*100,mon);
+      fmt.format("{\"LOAN\" : { \"terms\" : { \"principal\" :  %04.2f , \"annual interest rate \" : %04.2f , \"months\" : %d }}, \n",princp,irate*12*100,mon);
       payment = (irate*princp)/(1-(java.lang.Math.pow((1+irate),-mon)));
-      fmt.format("       { \"monthly payment\" : \"$%04.2f\" } \n",payment);
+      fmt.format("        \"monthly payment\" : %04.2f , \n",payment);
       paydet = calculatePaymentDetails(princp,irate,mon,payment);
-      fmt.format(" { \"details\" : \n");
       for(int indx = 0 ; indx < mon ; indx++){
-          fmt.format("{ \"detail\" : {\"month\" : \"%03d\" , \"interest payment\" : \"$%04.2f\" , \"principal paid\" : \"$%04.2f\" , \"principal balance\" : \"$%04.2f\" }\n",
+          fmt.format(" \"detail\" : {\"month\" : %d , \"interest payment\" : %04.2f , \"principal paid\" : %04.2f , \"principal balance\" : %04.2f },\n",
                   indx + 1, paydet[indx][0],paydet[indx][1],paydet[indx][2]);       
           totpay += payment;
       // System.out.format("Total paid: $%04.2f.\n",21);
       } // FOR
-      fmt.format(" } \n");
-      fmt.format(" {\"total payments\" : \"$%04.2f\" } \n", totpay);
+      fmt.format(" \"total payments\" : \"$%04.2f\"  \n", totpay);
       fmt.format("}");
       calculation = calculation.concat(sb.substring(0));
       return calculation;
