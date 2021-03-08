@@ -4,7 +4,7 @@ import java.util.*;
 
 public class PICalcJson {
 
-    private String calculation = new String("");
+    private String calculation = "";
     private StringBuilder sb   = new StringBuilder();
     private Formatter fmt      = new Formatter(sb);
     private double totpay      = 0;
@@ -15,14 +15,17 @@ public class PICalcJson {
       fmt.format("{\"LOAN\" : { \"terms\" : { \"principal\" :  %04.2f , \"annual interest rate \" : %04.2f , \"months\" : %d }}, \n",princp,irate*12*100,mon);
       payment = (irate*princp)/(1-(java.lang.Math.pow((1+irate),-mon)));
       fmt.format("        \"monthly payment\" : %04.2f , \n",payment);
+      fmt.format("       \"details\" : [ \n");
       paydet = calculatePaymentDetails(princp,irate,mon,payment);
       for(int indx = 0 ; indx < mon ; indx++){
-          fmt.format(" \"detail\" : {\"month\" : %d , \"interest payment\" : %04.2f , \"principal paid\" : %04.2f , \"principal balance\" : %04.2f },\n",
-                  indx + 1, paydet[indx][0],paydet[indx][1],paydet[indx][2]);       
+          fmt.format(" {\"month\" : %d , \"interest payment\" : %04.2f , \"principal paid\" : %04.2f , \"principal balance\" : %04.2f }",
+                  indx + 1, paydet[indx][0],paydet[indx][1],paydet[indx][2]);
+          if(indx < (mon - 1))  fmt.format(",\n");
+          else fmt.format("\n");
           totpay += payment;
       // System.out.format("Total paid: $%04.2f.\n",21);
       } // FOR
-      fmt.format(" \"total payments\" : \"$%04.2f\"  \n", totpay);
+      fmt.format(" ] , \n \"total payments\" : \"$%04.2f\"  \n", totpay);
       fmt.format("}");
       calculation = calculation.concat(sb.substring(0));
       return calculation;
@@ -55,3 +58,4 @@ public class PICalcJson {
 } // MAIN(STRING[])
 
 } // CLASS
+
